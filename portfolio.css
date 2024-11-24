@@ -1,21 +1,64 @@
+
+html {
+    scroll-behavior: smooth;
+}
+
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-
 body {
     font-family: Arial, sans-serif;
     background-color: #121212;
     color: #f1f1f1;
 }
-.logo {
-    font-size: 1.5rem;
+.horizontal-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #121212;
+    border-radius: 20px;
+    
+}
+
+.horizontal-navbar .logo {
+    position: absolute; 
+    top: 40px; 
+    left: 90px;
+    font-size: 2rem;
     font-weight: bold;
-    background: linear-gradient(45deg, #00d2ff, #3a7bd5);
+    font-family: 'Poppins', sans-serif;
+    color: #fbfbfb;
+    background: linear-gradient(45deg, #010c0e, #fdfeff, #141f84);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    animation: logoGlow 3s infinite alternate ease-in-out, logoBounce 4s infinite ease-in-out;
+    z-index: 1000;
+}
+
+@keyframes logoGlow {
+    0% {
+        text-shadow: 0 0 9px #00d2ff, 0 0 20px #3a7bd5, 0 0 30px #00ff88;
+    }
+    100% {
+        text-shadow: 0 0 17px #3a7bd5, 0 0 40px #00ff88, 0 0 60px #00d2ff;
+    }
+}
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInAnimation 1s ease-in forwards;
+}
+
+@keyframes fadeInAnimation {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .scroll-to-top-btn {
@@ -37,54 +80,97 @@ body {
     background-color: #58b8c7;
 }
 
-.navbar {
+.vertical-navbar {
+    background-color: transparent;
+    color: #fff;
+    width: 150px; 
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
-    padding: 1rem 2rem;
-    background-color: #1a1a1a;
+    padding: 40px 10px; 
+    border-radius: 15px; 
+    animation: glowingShadow 3s ease-in-out infinite;
+    position: fixed;
+    top:58%;
+    left: 50px; 
+    transform: translateY(-50%); 
+    z-index: 1000;
 }
 
-.nav-links {
+@keyframes glowingShadow {
+    0% {
+        box-shadow: 0 0 10px rgba(41, 173, 199, 0.6),
+                    0 0 20px rgba(29, 113, 137, 0.4),
+                    0 0 30px rgba(26, 39, 94, 0.6);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(61, 134, 147, 0.8),
+                    0 0 40px rgba(9, 40, 96, 0.6),
+                    0 0 60px rgba(47, 126, 142, 0.8);
+    }
+    100% {
+        box-shadow: 0 0 10px rgba(12, 9, 53, 0.6),
+                    0 0 20px rgba(51, 151, 159, 0.4),
+                    0 0 30px rgba(86, 176, 209, 0.6);
+    }
+}
+
+.vertical-navbar .nav-links {
     list-style: none;
-    display: flex;
-    gap: 1rem;
-}
-
-
-.nav-links a {
-    text-decoration: none;
-    color: #f1f1f1;
-    font-size: 1rem;
-    position: relative;
-    padding: 0.2rem 0.5rem;
-    transition: color 0.3s;
-}
-
-.nav-links a:hover {
-    color:#58b8c7;
-}
-
-.nav-links a::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
+    padding: 0;
+    margin: 0;
     width: 100%;
-    height: 100%;
-    background-color: #f1f1f1;
-    border-radius: 5px;
-    z-index: -1;
-    opacity: 0;
-    transform: scale(0.9);
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    margin-top: 20px; 
+
 }
 
-.nav-links a:hover::before {
-    opacity: 1;
-    transform: scale(1);
+.vertical-navbar .nav-links li {
+    margin-bottom: 10px; 
+    
 }
 
+.vertical-navbar .nav-links a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 14px; 
+    font-weight: 500;
+    padding: 8px 15px; 
+    border-radius: 20px;
+    display: block;
+    text-align: center; 
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.vertical-navbar .nav-links a:hover {
+    background: rgba(255, 255, 255, 0.3);
+    color: #fff;
+    transform: scale(1.05);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+body {
+    margin-left: 250px; 
+    font-family: 'Poppins', sans-serif;
+}
+
+
+@media (max-width: 768px) {
+    .vertical-navbar {
+        width: 60px;
+    }
+    .vertical-navbar .logo {
+        font-size: 18px;
+    }
+    .vertical-navbar .nav-links a {
+        justify-content: center;
+        font-size: 14px;
+        padding: 10px;
+    }
+    .vertical-navbar .nav-links a i {
+        margin-right: 0;
+    }
+}
 
 .contact-btn {
     padding: 0.5rem 1.2rem;
@@ -100,6 +186,7 @@ body {
     background-color: #f1f1f1;
     color: #1a1a1a;
 }
+
 
 .profile-section {
     opacity: 0; 
@@ -125,15 +212,14 @@ body {
     border-radius: 50%;
     object-fit: cover;
     margin-bottom: 1rem;
-
-    background: linear-gradient(45deg, #00d2ff, #3a7bd5, #00ff88);
-    border: 5px solid white; 
-
-   
-    box-shadow: 0 0 20px rgba(56, 250, 255, 0.3), 
+    position: relative; 
+    background: linear-gradient(45deg, #1100ff, #2e062b, #092249);
+    border: 3px solid rgb(255, 255, 255);
+    box-shadow: 0 0 20px rgba(20, 7, 84, 0.3), 
                 0 0 40px rgba(58, 250, 213, 0.3),
-                0 0 60px rgba(56, 255, 136, 0.3);
+                0 0 60px rgba(72, 4, 65, 0.3);
 }
+
 
 h1 {
     font-size: 2rem;
@@ -200,11 +286,9 @@ h1 {
     color: #1a1a1a;
 }
 
-
-
 .about-section {
     padding: 3rem 1rem;
-    background-color: #1a1a1a;
+    background-color: #121212;
 }
 
 .about-section h2 {
@@ -276,7 +360,7 @@ h1 {
 
 .skills-section {
     padding: 3rem 1rem;
-    background-color: #1a1a1a;
+    background-color: #121212;
 }
 
 .skills-section h2 {
@@ -313,7 +397,7 @@ h1 {
 
 .education-section {
     padding: 4rem 2rem;
-    background-color: #1f1f1f;
+    background-color: #121212;
     color: white;
     text-align: center;
     position: relative;
@@ -391,7 +475,7 @@ h1 {
 
 .services-section {
     padding: 3rem 1rem;
-    background-color: #1a1a1a;
+    background-color: #121212;
     text-align: center;
 }
 
@@ -447,7 +531,7 @@ h1 {
 
 .projects-section {
     padding: 3rem 1rem;
-    background-color: #1a1a1a;
+    background-color: #121212;
     text-align: center;
 }
 
@@ -548,7 +632,7 @@ h1 {
 
     .contact-section {
         padding: 3rem 1rem;
-        background-color: #1a1a1a;
+        background-color: #121212; 
         text-align: center;
     }
 
@@ -577,7 +661,7 @@ h1 {
         padding: 1rem;
         border: 2px solid #808080;
         border-radius: 10px;
-        background-color: #121212;
+        background-color:  #1a1a1a;
         color: #f1f1f1;
         font-size: 1rem;
         resize: none;
@@ -624,7 +708,6 @@ h1 {
 .contact-form button:active {
     transform: scale(0.95);
 }
-
 
 
 
